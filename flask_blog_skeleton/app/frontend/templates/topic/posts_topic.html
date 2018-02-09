@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+{% block title %} -  {{ topic }} {% endblock %}
+
+{% block content %}
+<br/>
+
+    {% if find_posts_topic|length == 0 %}
+        <p>
+          NO POSTS TO SHOW WITH TOPIC '{{ topic }}'
+        </p>
+    {% else %}
+        <h1> POSTS TAGGED '{{ topic }}' </h1>
+        <br/>
+            <p>
+            {% for row in find_posts_topic %}
+                <a href="{{ url_for('blog_posts.show_post', id = row.id) }}" > {{ row.title }} </a> <br/>
+                {{ row.body }} <br/>
+                topics: {{ row.topic }} <br/>
+                tags: {{ row.tag }} <br/>
+                status: {{ row.status }} <br/>
+                date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+                author: {{ row.username }} <br/>
+                <br/>
+                <br/>
+            {% endfor %}
+           
+            </p>
+           
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+{% block title %} - All Posts{% endblock %}
+
+{% block content %}
+<br/>
+
+    {% if posts|length == 0 %}
+        <p>
+            NOTHING TO SHOW
+        </p>
+    {% else %}  
+        <h1>
+            ALL POSTS:
+        </h1>
+        
+        {% for row in posts %}
+        <p>
+        {{ row.title }} <br/>
+        {{ row.body }} <br/>
+        topics: {{ row.topic }} <br/>
+        tags: {{ row.tag }} <br/>
+        status: {{ row.status }} <br/>
+        date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+        author: {{ current_user.username }} <br/>
+        </p>
+
+    {% endfor %}
+        
+    {% endif %}
+
+{% endblock content %}

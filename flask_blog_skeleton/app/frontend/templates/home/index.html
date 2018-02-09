@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+{% block title %} - Another blog site {% endblock %}
+
+{% block content %}
+
+<br/>
+
+    {% if all_posted|length == 0 %}
+        <p>
+          NO POSTS TO SHOW
+        </p>
+    {% else %}
+        <br/>
+            <p>
+            {% for row in all_posted %}
+                <a href="{{ url_for('blog_posts.show_post', id = row.id) }}" >  {{ row.title }} </a> <br/>
+                {{ row.body }}
+                topics: {{ row.topic }} <br/>
+                tags: {{ row.tag }} <br/>
+                date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+                author: {{ row.username }} <br/>
+                <br/>
+                <br/>
+            {% endfor %}
+           
+            </p>
+           
+    {% endif %}
+
+    {% if prev_url %}
+        <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    
+    {% if next_url %}
+        <a href="{{ next_url }}">Older posts</a>
+    {% endif %}   
+
+    <br/>
+    {%- include 'sidebar.html' -%}
+    <br/>
+{% endblock %}

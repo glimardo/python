@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content %}
+<br/>
+
+<h1>{{ post.title }}</h1>
+<p>
+    {{ post.body }} <br/>
+    topics: {{ post.topic }} <br/>
+    tags: {{ post.tag }} <br/>
+    status: {{ post.status }} <br/>
+    author: {{ current_user.username }} <br/>
+</p>
+
+<p>Posted at {{ post.posted_date.strftime('%Y-%m-%d') }}</p>
+
+<p>
+
+   {% if current_user.is_authenticated %}
+
+       <p> Edit <a href="{{ url_for('blog_posts.edit_post', id = post.id) }}">this post</a>?</p>
+       <p> Remove <a href="{{ url_for('blog_posts.delete_post', id = post.id) }}">this post</a>?</p>
+
+   {% endif %}
+</p>
+
+{% endblock content %}

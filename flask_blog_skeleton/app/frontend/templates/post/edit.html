@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+{% from "helper/_formhelpers.html" import render_field %}
+
+{% block title %} - Edit this post {% endblock %}
+
+{% block content %}
+
+  <form class="form" role="form" method="post" action="">
+
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+
+    <h1 class="h3 mb-3 font-weight-normal">Edit this post</h1>
+
+    {{ render_field(form.post_title) }}
+    {{ render_field(form.post_body) }}
+    {{ render_field(form.post_topic) }}
+    {{ render_field(form.post_tag) }}
+    {{ render_field(form.post_status) }}
+
+    <br/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    <!-- <p>Would You like to <a href="{{ url_for('blog_posts.show_all_posts') }}">view all posts</a>?</p>
+    <p>Would You like to <a href="{{ url_for('blog_posts.show_all_user_posts', user_id = current_user.id) }}">view all your posts</a>?</p> -->
+    <!-- <p>Hi {{ current_user.username }}</p>
+    <p>Hi {{ current_user.id }}</p> -->
+
+  </form>
+
+{% endblock content %}

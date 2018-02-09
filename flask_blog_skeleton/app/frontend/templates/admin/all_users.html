@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% block title %} - All Users{% endblock %}
+
+{% block content %}
+<br/>
+    {% if all_users|length == 0 %}
+        <p>
+        NO USERS TO SHOW
+        </p>
+    {% else %}  
+        <h1>  USERS </h1>
+        <br/>
+        <a href="{{ url_for('user.register') }}">Add new user</a>
+
+        <p>
+            All users {{ all_users|length }}
+        </p>
+
+        <p>
+          <a href="">All users not admin</a> {{ all_users_not_admin|length }}
+          <br/>
+             
+              {% for row in all_users_not_admin %}
+
+                  <p>
+                  <a href="{{ url_for('user.show_user_profile', id = row.id) }}">{{ row.username }} </a> <br/>
+                  First Name: {{ row.first_name }} <br/>
+                  Last Name: {{ row.last_name }} <br/>
+                  E-mail: {{ row.email }} <br/>
+                  Registered date: {{ row.registered_on }} <br/>
+              {% endfor %}    
+      </p>
+
+      <p>
+        <a href="">All Admins</a> {{ all_admins|length }}
+        <br/>
+            {% for row in all_admins %}
+                <p>
+                <a href="{{ url_for('user.show_user_profile', id = row.id) }}">{{ row.username }} </a> <br/>
+                First Name: {{ row.first_name }} <br/>
+                Last Name: {{ row.last_name }} <br/>
+                E-mail: {{ row.email }} <br/>
+                Registered date: {{ row.registered_on }} <br/>
+                
+
+           {% endfor %}
+    </p>
+
+
+
+    {% endif %}
+{% endblock content %}

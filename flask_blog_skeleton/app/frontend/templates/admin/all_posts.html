@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% block title %} - All Posts{% endblock %}
+
+{% block content %}
+<br/>
+
+    {% if all_posts|length == 0 %}
+        <p>
+            NO POST TO SHOW
+        </p>
+    {% else %}  
+        <h1>  POSTS </h1>
+            <br/>
+            <a href="{{ url_for('blog_posts.new_post') }}">Add new post</a>
+
+            <p>
+                <a href="">All posts</a> {{ posts_published|length }}
+                <br/>
+                    {% for row in all_posts %}
+                        <p>
+                        <a href="{{ url_for('blog_posts.show_post', id = row.id) }}">{{ row.title }} </a> <br/>
+                        {{ row.body }} <br/>
+                        status: {{ row.status }} <br/>
+                        date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+                        author: {{ current_user.username }} <br/>
+                        </p>
+                   {% endfor %}
+            </p>
+
+            <p>
+              <a href="">All published posts</a> {{ all_published_posts|length }}
+              <br/>
+                  {% for row in all_published_posts %}
+                      <p>
+                      <a href="{{ url_for('blog_posts.show_post', id = row.id) }}">{{ row.title }} </a> <br/>
+                      {{ row.body }} <br/>
+                      status: {{ row.status }} <br/>
+                      date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+                      author: {{ current_user.username }} <br/>
+                      </p>
+                 {% endfor %}
+          </p>
+
+          <p>
+            <a href="">All draft posts</a> {{ all_draft_posts|length }}
+            <br/>
+                {% for row in all_draft_posts %}
+                    <p>
+                    <a href="{{ url_for('blog_posts.show_post', id = row.id) }}">{{ row.title }} </a> <br/>
+                    {{ row.body }} <br/>
+                    status: {{ row.status }} <br/>
+                    date:  {{ row.last_edit_date.strftime('%Y-%m-%d') }} <br/>
+                    author: {{ current_user.username }} <br/>
+                    </p>
+               {% endfor %}
+        </p>
+
+    {% endif %}
+
+{% endblock content %}

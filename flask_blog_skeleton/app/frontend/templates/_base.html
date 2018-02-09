@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <title>Your Title here {% block title %}{% endblock %} </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template gian -->
+    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    {% include 'header.html' %}
+        
+    <!-- Begin page content -->
+    <main role="main" class="container">
+
+        <!-- messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
+             {{message}}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+        
+        <br>
+            
+            <!-- errors -->
+            {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+
+    </main>
+
+    {% include 'footer.html' %}
+
+    <!-- Placed scripts at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
